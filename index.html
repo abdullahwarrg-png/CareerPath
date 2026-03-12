@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Abdullah Elshafie Warrag Abdelrahman – ID: 242924675">
-<meta property="og:description" content="🔴CareerPath: Knowledge Management Intelligence Platform – Final Assesment Website">
 <title>CareerPath — Map Your Next Career Move</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -132,6 +130,8 @@ body::after {
 .nhbg.open span:nth-child(2) { opacity: 0; }
 .nhbg.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
+.nlinks { flex-wrap: wrap; }
+
 .nmob {
   display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 799;
   background: rgba(14,13,11,.97); backdrop-filter: blur(20px);
@@ -148,6 +148,19 @@ body::after {
 }
 .nmob a:hover { color: var(--amber); }
 .nmob .ncta { margin-top: 12px; width: 100%; text-align: center; }
+
+@media (max-width: 900px) {
+  #nav { height: 56px; }
+  .nlinks { display: none; }
+  .ncta { display: none; }
+  .nhbg { display: flex; }
+}
+
+@media (max-width: 420px) {
+  #nav { padding: 0 14px; }
+  .nword { font-size: 12px; }
+  .nmark { width: 24px; height: 24px; font-size: 11px; }
+}
 
 /* ═══════════════════════════════════════════
    HERO  — mobile-first
@@ -946,7 +959,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: clam
   <div class="hero-text">
     <div class="htag">
       <span class="htag-dot"></span>
-      <span>Knowledge Management Demo.</span>
+      <span>AI-Powered Career Intelligence</span>
     </div>
     <h1 class="hh1">The career<br>you want is<br><em>one decision away.</em></h1>
     <p class="hsub">Most people spend years in the wrong direction. CareerPath gives you <strong>clarity in minutes</strong> — mapping your skills to real opportunities and showing you exactly how to get there.</p>
