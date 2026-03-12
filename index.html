@@ -90,7 +90,7 @@ body::after {
   position: fixed; top: 0; left: 0; right: 0; z-index: 800;
   height: 56px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 clamp(16px, 4vw, 40px);
+  padding: 0 clamp(12px, 3.5vw, 36px);
   background: rgba(14,13,11,.88);
   backdrop-filter: blur(20px) saturate(140%);
   border-bottom: 1px solid transparent;
@@ -106,9 +106,9 @@ body::after {
 }
 .nword { font-family: var(--ff-mono); font-size: 14px; font-weight: 600; color: var(--txt); }
 
-.nlinks { display: flex; gap: 28px; list-style: none; }
+.nlinks { display: flex; gap: clamp(12px, 3vw, 28px); list-style: none; }
 .nlinks a {
-  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .05em;
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .04em;
   color: var(--txt3); transition: color .2s; padding: 2px 0; position: relative;
 }
 .nlinks a::after {
@@ -132,7 +132,7 @@ body::after {
 .nhbg.open span:nth-child(2) { opacity: 0; }
 .nhbg.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-.nlinks { flex-wrap: wrap; }
+.nlinks { flex-wrap: wrap; row-gap: 8px; }
 
 .nmob {
   display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 799;
@@ -152,16 +152,18 @@ body::after {
 .nmob .ncta { margin-top: 12px; width: 100%; text-align: center; }
 
 @media (max-width: 900px) {
-  #nav { height: 56px; }
-  .nlinks { display: none; }
-  .ncta { display: none; }
-  .nhbg { display: flex; }
-}
-
-@media (max-width: 420px) {
-  #nav { padding: 0 14px; }
+  #nav { height: auto; padding: 8px 12px; gap: 10px; }
+  .nlinks { gap: 12px; }
+  .nlinks a { font-size: 10px; letter-spacing: .03em; }
   .nword { font-size: 12px; }
   .nmark { width: 24px; height: 24px; font-size: 11px; }
+  .nhbg { display: none; }
+}
+
+@media (max-width: 600px) {
+  #nav { padding: 10px 10px; }
+  .nlinks { gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  .nlinks a { font-size: 9.5px; }
 }
 
 /* ═══════════════════════════════════════════
@@ -428,18 +430,14 @@ body::after {
 .qs-h { font-family: var(--ff-head); font-size: clamp(24px,2.8vw,32px); font-weight: 700; color: var(--txt); line-height: 1.18; margin-bottom: 14px; }
 .qs-sub { font-size: 14px; line-height: 1.75; color: var(--txt3); font-weight: 300; }
 
-.arch-list { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-@media (min-width: 860px) { .arch-list { flex-direction: column; margin-top: auto; padding-top: 32px; gap: 8px; } }
-.arch-card {
-  padding: 10px 14px; border: 1px solid var(--bdr);
-  display: flex; align-items: center; gap: 10px;
-  transition: border-color .2s, background .2s; cursor: default;
+.arch-par {
+  margin-top: 24px;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--txt4);
+  line-height: 1.7;
 }
-.arch-card:hover { border-color: rgba(212,136,26,.35); background: var(--amber-dim); }
-.arch-pip { width: 7px; height: 7px; background: var(--amber); opacity: .28; flex-shrink: 0; transition: opacity .2s; }
-.arch-card:hover .arch-pip { opacity: 1; }
-.arch-nm { font-family: var(--ff-mono); font-size: 11px; color: var(--txt4); transition: color .2s; }
-.arch-card:hover .arch-nm { color: var(--txt2); }
+@media (min-width: 860px) { .arch-par { margin-top: auto; padding-top: 32px; } }
 
 /* quiz main */
 .quiz-main {
@@ -942,7 +940,6 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: clam
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#comments">Community</a></li>
   </ul>
-  <button class="ncta" onclick="sTo('#quiz')">Discover Your Path</button>
   <button class="nhbg" id="hbg" onclick="toggleNav()" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -952,7 +949,6 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: clam
   <a href="#ai"       onclick="closeNav()">AI Career Engine</a>
   <a href="#roadmap"  onclick="closeNav()">Career Roadmap</a>
   <a href="#comments" onclick="closeNav()">Community</a>
-  <button class="ncta" onclick="closeNav();sTo('#quiz')">Discover Your Path</button>
 </div>
 
 <!-- ══ HERO ══ -->
@@ -961,13 +957,13 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: clam
   <div class="hero-text">
     <div class="htag">
       <span class="htag-dot"></span>
-      <span>AI-Powered Career Intelligence</span>
+      <span>Knowledge Management Intelligence</span>
     </div>
     <h1 class="hh1">The career<br>you want is<br><em>one decision away.</em></h1>
     <p class="hsub">Most people spend years in the wrong direction. CareerPath gives you <strong>clarity in minutes</strong> — mapping your skills to real opportunities and showing you exactly how to get there.</p>
     <div class="hbtns">
-      <button class="btn-p" onclick="sTo('#quiz')">Discover Your Archetype ↓</button>
-      <button class="btn-g" onclick="sTo('#ai')">Try the Knowledge Analysis</button>
+      <button class="btn-p" onclick="sTo('#quiz')">Archetype Quiz ↓</button>
+      <button class="btn-g" onclick="sTo('#ai')">Take Knowledge Analysis</button>
     </div>
     <div class="hproof">
       <div><span class="pn" data-count="94"    data-suffix="%">0</span><span class="pl">Match Accuracy</span></div>
@@ -1011,12 +1007,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: clam
       <span class="label">01 — Career Personality</span>
       <h2 class="qs-h">What kind of professional are you, <em style="font-style:italic;font-weight:300">really?</em></h2>
       <p class="qs-sub">Five questions. No filler. Discover the archetype that describes how you actually think — and the roles designed for it.</p>
-      <div class="arch-list">
-        <div class="arch-card"><div class="arch-pip"></div><span class="arch-nm">The Architect — thinks in systems</span></div>
-        <div class="arch-card"><div class="arch-pip"></div><span class="arch-nm">The Builder — ships relentlessly</span></div>
-        <div class="arch-card"><div class="arch-pip"></div><span class="arch-nm">The Multiplier — grows people</span></div>
-        <div class="arch-card"><div class="arch-pip"></div><span class="arch-nm">The Explorer — finds the frontier</span></div>
-      </div>
+      <p class="arch-par">The Architect — thinks in systems. The Builder — ships relentlessly. The Multiplier — grows people. The Explorer — finds the frontier.</p>
     </div>
 
     <!-- main quiz area -->
@@ -1064,7 +1055,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: clam
             <span class="ai-step-lbl">Where are you now?</span>
           </div>
           <div class="ai-step-body">
-            <div class="fl"><label>Current Role</label><input class="fi" id="aiRole" type="text" placeholder="e.g. Senior Frontend Engineer" /></div>
+            <div class="fl"><label>Current Role</label><input class="fi" id="aiRole" type="text" placeholder="e.g. Backend Engineer" /></div>
             <div class="fl"><label>Years of Experience</label>
               <div class="tagrow" id="expTags">
                 <span class="tag" onclick="setExp(this)">0–2 yrs</span>
